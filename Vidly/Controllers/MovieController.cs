@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Vidly.Models;
 namespace Vidly.Controllers
 {
+
     public class MovieController : Controller
     {
         // GET: Movie
@@ -17,5 +18,17 @@ namespace Vidly.Controllers
             };
             return View(movie);
         }
+
+        public ActionResult Edit(int id)
+        {
+            return Content("id=" + id);
+        }
+
+        [Route("movie/released/{year}/{month:regex(\\d{2}):range(1,12)}")]
+        public ActionResult ByReleasedDate(int year, int month)
+        {
+            return Content(year + "/" + month);
+        }
+
     }
 }
