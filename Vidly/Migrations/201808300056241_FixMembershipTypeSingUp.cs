@@ -7,14 +7,14 @@ namespace Vidly.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.MembershipTypes", "SingUpFee", c => c.Short(nullable: false));
-            DropColumn("dbo.MembershipTypes", "SingÚpFee");
+            //AddColumn("dbo.MembershipTypes", "SingUpFee", c => c.Short(nullable: false));
+            //DropColumn("dbo.MembershipTypes", "SingÚpFee");
         }
         
         public override void Down()
         {
-            AddColumn("dbo.MembershipTypes", "SingÚpFee", c => c.Short(nullable: false));
-            DropColumn("dbo.MembershipTypes", "SingUpFee");
+            //AddColumn("dbo.MembershipTypes", "SingÚpFee", c => c.Short(nullable: false));
+            //DropColumn("dbo.MembershipTypes", "SingUpFee");
         }
     }
 }
