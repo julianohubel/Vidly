@@ -12,10 +12,10 @@ namespace Vidly.Models
         public string Name { get; set; }
         public Genre Genre { get; set; }
         [Display(Name="Release Date")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Release { get; set; }
         [Display(Name = "Added Date")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Added { get; set; }
         public int Stock { get; set; }
 

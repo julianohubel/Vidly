@@ -7,44 +7,13 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Movie</h4>
+    <h4>@Model.Name</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model =>  model.Release)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Release)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Added)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Added)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Stock)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Stock)
-        </dd>
-
-    </dl>
+    <ul>
+        <li>Genre: @Model.Genre.Name</li>
+        <li>Release Date: @Model.Release.ToLongDateString()</li>
+        <li>Date Added: @Model.Added.ToLongDateString()</li>
+        <li>Number in Stock: @Model.Stock</li>
+    </ul>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

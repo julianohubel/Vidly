@@ -28,7 +28,7 @@ namespace Vidly.Controllers
         public ActionResult Details(int? id)
         {
 
-            var movie = _context.Movies.Single(m => m.Id == id);
+            var movie = _context.Movies.Include(m => m.Genre).Single(m => m.Id == id);
 
             if (movie != null)
                 return View(movie);
