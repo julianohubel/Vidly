@@ -11,6 +11,7 @@ namespace Vidly.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public Genre Genre { get; set; }
+        public int GenreId { get; set; }
         [Display(Name="Release Date")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Release { get; set; }

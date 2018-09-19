@@ -49,11 +49,56 @@ namespace Vidly.Controllers
             return View(viewModel);
         }
 
+
+        public ActionResult Save(int? id)
+        {
+
+            ViewBag.Genres = _context.Genres.ToList();
+
+            if (!id.HasValue)
+                return View();
+
+            var movie = _context.Movies.Single(m => m.Id == id);
+
+            if (movie == null)
+                return HttpNotFound();
+
+
+            return View(movie);
+
+        }
+        [HttpPost]
+        public ActionResult Save(Movie movie)
+        {
+            if(movie.Id == 0)
+            {
+
+                movie.Added = DateTime.Now;
+                _context.Movies.Add(movie);
+            }
+            else
+            {                
+
+                _context.Entry(movie).State = EntityState.Modified;
+
+                
+            }
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         public ActionResult Edit(int id)
         {
 
-            //to do edit
-            return View();
+            var movie =  _context.Movies.Single(m => m.Id == id);
+
+            if (movie == null)
+                return HttpNotFound();
+
+            ViewBag.Genres = _context.Genres.ToList();
+
+            return View(movie);
         }
 
         [Route("movie/released/{year}/{month:regex(\\d{2}):range(1,12)}")]
@@ -61,6 +106,9 @@ namespace Vidly.Controllers
         {
             return Content(year + "/" + month);
         }
+
+        
+
 
 
     }
