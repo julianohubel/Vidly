@@ -65,6 +65,8 @@ namespace Vidly.Controllers
         {
             var customer = _context.Customers.Include(c => c.MembershipType).SingleOrDefault(c => c.Id == Id);
 
+            ViewBag.MemebershipTypes = _context.MembershipTypes;
+
             if (customer != null)
                 return View(customer);
 
@@ -72,6 +74,17 @@ namespace Vidly.Controllers
 
 
 
+        }
+
+
+        [HttpPost]
+        public ActionResult Edit(Customer customer)
+        {
+
+            _context.Entry(customer).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
     }
