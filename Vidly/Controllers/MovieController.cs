@@ -70,6 +70,14 @@ namespace Vidly.Controllers
         [HttpPost]
         public ActionResult Save(Movie movie)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Genres = _context.Genres.ToList();
+
+                return View();
+            }
+                
+
             if(movie.Id == 0)
             {
 

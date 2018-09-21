@@ -13,6 +13,7 @@ namespace Vidly.Models
         [StringLength(255)]
         public string Name { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}",ApplyFormatInEditMode = true)]
+        [Min18YearsOldIfMember]
         public DateTime? BirthDate { get; set; }
         public bool IsSubstribedToNewsletter { get; set; }
         public MembershipType MembershipType { get; set; }
