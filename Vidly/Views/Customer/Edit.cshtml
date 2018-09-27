@@ -10,22 +10,28 @@
     <div class="form-group">
         @Html.LabelFor(c => c.Name);
         @Html.TextBoxFor(c => c.Name, new { @class = "form-control", placeholde = "Enter Name" })
+        @Html.ValidationMessageFor(c => c.Name)
+    </div>
+    <div class="form-group form-check">
+        @Html.LabelFor(c => c.MembershipTypeId)
+        @Html.DropDownListFor(c => c.MembershipTypeId, new SelectList(ViewBag.MemebershipTypes, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.MembershipTypeId)
     </div>
     <div class="form-group">
         @Html.LabelFor(c => c.BirthDate);
-        @Html.TextBoxFor(c => c.BirthDate,"{0:dd/MM/yyyy}",  new { @class = "form-control", placeholde = "01/01/1990" })
+        @Html.TextBoxFor(c => c.BirthDate, "{0:dd/MM/yyyy}", new { @class = "form-control", placeholde = "01/01/1990" })
+        @Html.ValidationMessageFor(c => c.BirthDate)
     </div>
 
     <div class="form-group form-check">
         @Html.CheckBoxFor(c => c.IsSubstribedToNewsletter)
         <label class="form-check-label"> Subscribe to Newsletter</label>
     </div>
-    <div class="form-group form-check">
-        @Html.LabelFor(c => c.MembershipTypeId)
-        @Html.DropDownListFor(c => c.MembershipTypeId, new SelectList(ViewBag.MemebershipTypes, "Id", "Name"), new { @class = "form-control" })
-    </div>
 
-
+    @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Submit</button>
 }
-
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval");        
+ }

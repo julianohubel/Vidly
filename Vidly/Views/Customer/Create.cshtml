@@ -9,11 +9,16 @@
 @using (Html.BeginForm("Create", "Customer"))
 {
 
+    @Html.ValidationSummary();
     <div class="form-group">
-        
         @Html.LabelFor(c => c.Customer.Name)
         @Html.TextBoxFor(c => c.Customer.Name, new { @class = "form-control", placeholder = "Enter Name" })
         @Html.ValidationMessageFor(c => c.Customer.Name)
+    </div>
+    <div class="form-group form-check">
+        @Html.LabelFor(c => c.Customer.MembershipTypeId)
+        @Html.DropDownListFor(c => c.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Customer.MembershipTypeId)
     </div>
     <div class="form-group">
         @Html.LabelFor(c => c.Customer.BirthDate)
@@ -24,14 +29,13 @@
         @Html.CheckBoxFor(c => c.Customer.IsSubstribedToNewsletter)
         <label class="form-check-label"> Subscribe to Newsletter</label>
     </div>
-    <div class="form-group form-check">
-        @Html.LabelFor(c => c.Customer.MembershipTypeId)
-        @Html.DropDownListFor(c => c.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type",  new {@class="form-control"})
-        @Html.ValidationMessageFor(c => c.Customer.MembershipTypeId)
-    </div>
 
-
+    @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Submit</button>
 
 }
 
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval");
+}
