@@ -40,7 +40,7 @@ namespace Vidly.Controllers
 
         // GET: Movie
         public ActionResult Random()
-        {                 
+        {
             var viewModel = new RandomMovieViewModel
             {
                 Movie = _context.Movies.FirstOrDefault(),
@@ -63,33 +63,28 @@ namespace Vidly.Controllers
             if (movie == null)
                 return HttpNotFound();
 
-
             return View(movie);
 
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
             if (!ModelState.IsValid)
             {
+
                 ViewBag.Genres = _context.Genres.ToList();
 
-                return View();
+                return View("Save", movie);
             }
-                
 
-            if(movie.Id == 0)
+            if (movie.Id == 0)
             {
-
-                movie.Added = DateTime.Now;
                 _context.Movies.Add(movie);
             }
             else
-            {                
-
+            {
                 _context.Entry(movie).State = EntityState.Modified;
-
-                
             }
             _context.SaveChanges();
 
@@ -99,7 +94,7 @@ namespace Vidly.Controllers
         public ActionResult Edit(int id)
         {
 
-            var movie =  _context.Movies.Single(m => m.Id == id);
+            var movie = _context.Movies.Single(m => m.Id == id);
 
             if (movie == null)
                 return HttpNotFound();
@@ -115,7 +110,7 @@ namespace Vidly.Controllers
             return Content(year + "/" + month);
         }
 
-        
+
 
 
 

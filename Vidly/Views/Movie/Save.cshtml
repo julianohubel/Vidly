@@ -8,26 +8,36 @@
 
 @using (Html.BeginForm("Save", "Movie"))
 {
+    @Html.ValidationSummary();
 
     <div class="form-group">
         @Html.LabelFor(m => m.Name)
         @Html.TextBoxFor(m => m.Name, new { @class="form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Release)
-        @Html.TextBoxFor(m => m.Release,"{0:dd/MM/yyyy}", new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.Release, "{0:dd/MM/yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Release)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Genre)
-        @Html.DropDownListFor(m => m.GenreId, new SelectList(ViewBag.Genres, "Id", "Name"), "Select Genre" , new { @class="form-control"})
+        @Html.DropDownListFor(m => m.GenreId, new SelectList(ViewBag.Genres, "Id", "Name"), "Select Genre", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.GenreId)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Stock)
         @Html.TextBoxFor(m => m.Stock, new { @class = "form-control" })
-    </div>    
-    @Html.HiddenFor(m => m.Added)
+        @Html.ValidationMessageFor(m => m.Stock)
+    </div>       
+    @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>
 
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
 }
 
 

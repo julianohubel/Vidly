@@ -8,6 +8,10 @@ namespace Vidly.Models
 {
     public class Movie
     {
+        public Movie()
+        {
+            Added = DateTime.Now;
+        }
         public int Id { get; set; }
         [Required(ErrorMessage = "Name Is Required")]
         [StringLength(255)]
@@ -21,8 +25,10 @@ namespace Vidly.Models
         public DateTime Release { get; set; }
         [Display(Name = "Added Date")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        
         public DateTime Added { get; set; }
-        [Required(ErrorMessage = "Stock date is Required")]
+        [Required(ErrorMessage = "Stock is Required")]        
+        [Range(1,20, ErrorMessage = "O estoque deve estar entre {1} e {2}")]
         public int Stock { get; set; }
 
 
