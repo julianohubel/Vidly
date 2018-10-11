@@ -13,17 +13,17 @@ namespace Vidly.Controllers.Api
 {
     public class CustomersController : ApiController
     {
-        private ApplicationDbContext _context;      
+        private ApplicationDbContext _context;
 
         public CustomersController()
         {
-            _context = new ApplicationDbContext();           
+            _context = new ApplicationDbContext();
         }
 
         // GET /api/customers
         public IHttpActionResult GetCustomers()
         {
-            var customers =  _context.Customers
+            var customers = _context.Customers
                 .Include(c => c.MembershipType)
                 .ToList()
                 .Select(Mapper.Map<Customer, CustomerDto>);
@@ -48,9 +48,7 @@ namespace Vidly.Controllers.Api
         public IHttpActionResult CreateCustomer(CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
-                return BadRequest(); 
-                
-           
+                return BadRequest();
 
             var customer = Mapper.Map<CustomerDto, Customer>(customerDto);
 
@@ -73,13 +71,13 @@ namespace Vidly.Controllers.Api
 
             if (!ModelState.IsValid)
                 return BadRequest();
-                    
 
-            Mapper.Map(customerDto, customerInDb);                        
+
+            Mapper.Map(customerDto, customerInDb);
             _context.SaveChanges();
 
             return Ok();
-                
+
         }
 
         //DELETE api/customers/1

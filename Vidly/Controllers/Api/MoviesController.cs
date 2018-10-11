@@ -29,21 +29,50 @@ namespace Vidly.Controllers.Api
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
+
+            if (movie == null)
+                return NotFound();
+
+            return Ok(Mapper.Map<Movie, MovieDto>(movie));            
         }
 
         // POST api/<controller>
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post(MovieDto movieDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var movie = Mapper.Map<MovieDto, Movie>(movieDto);
+
+            _context.Movies.Add(movie);
+            _context.SaveChanges();
+
+            movieDto.Id = movie.Id;
+
+            return Created(new Uri(Request.RequestUri + "/"+ movie.Id), movieDto);
         }
 
         // PUT api/<controller>/5
         [HttpPut]
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put(int id, MovieDto movieDto)
         {
+            var movieInDb = _context.Movies.Single(m => m.Id == id);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (movieInDb == null)
+                return NotFound();
+
+            Mapper.Map(movieDto, movieInDb);
+
+            _context.SaveChanges();
+
+            return Ok();
         }
 
         // DELETE api/<controller>/5
