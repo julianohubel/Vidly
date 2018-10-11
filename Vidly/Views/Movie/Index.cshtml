@@ -9,8 +9,13 @@
 
 <table id="movies" class="table table-hover">
     <thead>
-        <tr><th scope="col">Name</th><th scope="col">Genre</th></tr>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Delete</th>
+        </tr>
     </thead>
+
     <tbody></tbody>
 </table>
 
@@ -23,21 +28,44 @@
                 $("#movies").DataTable({
                     ajax: {
                         url: "/api/movies",
-                        dataSrc : ""
+                        dataSrc: ""
                     },
                     columns:
-                    [
-                        {
-                            data: "name",
-                            render: function (data, type, movie) {
-                                return "<a href='/movie/save/" + movie.id + "'>" + data + "</a>"
+                        [
+                            {
+                                data: "name",
+                                render: function (data, type, movie) {
+                                    return "<a href='/movie/save/" + movie.id + "'>" + data + "</a>"
+                                }
+                            },
+                            {
+                                data: "genre.name"
+                            },
+                            {
+                                data: "id",
+                                render: function (data) {
+                                    return "<button class='btn-link js-delete' data-movie-id='" + data + "' >Delete</button>"
+                                }
                             }
-                        },
-                        {
-                            data: "genre.name"
-                        }
-                    ]
+                        ]
                 });
+
+            $("#movies").on("click", ".js-delete", function () {
+                button = $(this);
+                bootbox.confirm("Tem Certeza que quer remover esse item?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/movies/" + button.attr("data-movie-id"),
+                            method: "DELETE",
+                            success: function () {
+                                tbl.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+            });
+
+
         });
     </script>
 

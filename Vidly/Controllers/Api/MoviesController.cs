@@ -48,8 +48,17 @@ namespace Vidly.Controllers.Api
 
         // DELETE api/<controller>/5
         [HttpDelete]
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
+            var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
+
+            if (movie == null)
+                return NotFound();
+
+            _context.Movies.Remove(movie);
+            _context.SaveChanges();
+
+            return Ok();
         }
     }
 }
