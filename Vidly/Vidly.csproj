@@ -278,8 +278,11 @@
       <DependentUpon>201810191350311_seed-users.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AcconuntViewModels\ExternalLoginListViewModel.cs" />
+    <Compile Include="Models\AcconuntViewModels\RegisterViewModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\AcconuntViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
