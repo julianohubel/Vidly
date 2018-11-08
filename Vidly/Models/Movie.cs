@@ -30,6 +30,7 @@ namespace Vidly.Models
         [Required(ErrorMessage = "Stock is Required")]        
         [Range(1,20, ErrorMessage = "O estoque deve estar entre {1} e {2}")]
         public int Stock { get; set; }
+        public int Avaliable { get; set; }
 
 
     }

@@ -20,9 +20,12 @@
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44304</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>
+    </IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -210,6 +213,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CustomersController.cs" />
     <Compile Include="Controllers\Api\MoviesController.cs" />
+    <Compile Include="Controllers\Api\MovieRentalsController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -218,6 +222,7 @@
     <Compile Include="Dtos\GenreDto.cs" />
     <Compile Include="Dtos\MembershipTypeDto.cs" />
     <Compile Include="Dtos\MovieDto.cs" />
+    <Compile Include="Dtos\MovieRentalsDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -277,6 +282,14 @@
     <Compile Include="Migrations\201810191350311_seed-users.Designer.cs">
       <DependentUpon>201810191350311_seed-users.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811081241307_AddMovieRentalModel.cs" />
+    <Compile Include="Migrations\201811081241307_AddMovieRentalModel.Designer.cs">
+      <DependentUpon>201811081241307_AddMovieRentalModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811081731112_AddAvaliableFieldOnMovie.cs" />
+    <Compile Include="Migrations\201811081731112_AddAvaliableFieldOnMovie.Designer.cs">
+      <DependentUpon>201811081731112_AddAvaliableFieldOnMovie.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AcconuntViewModels\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\AcconuntViewModels\RegisterViewModel.cs" />
@@ -289,6 +302,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\MovieRental.cs" />
     <Compile Include="Models\RoleName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -659,6 +673,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810191350311_seed-users.resx">
       <DependentUpon>201810191350311_seed-users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811081241307_AddMovieRentalModel.resx">
+      <DependentUpon>201811081241307_AddMovieRentalModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811081731112_AddAvaliableFieldOnMovie.resx">
+      <DependentUpon>201811081731112_AddAvaliableFieldOnMovie.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
