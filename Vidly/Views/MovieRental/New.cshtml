@@ -4,7 +4,7 @@
 }
 
 <h2>New Rental</h2>
-<form>
+<form id="newRental">
     <div class="form-group">
         <label>Customer</label>
         <div class="tt-container">
@@ -33,8 +33,8 @@
 
             var vm =
             {
-                customerId: 0,
-                movieIds: []
+                CustomerId: 0,
+                MoviesId: []
             };
 
             var customers = new Bloodhound({
@@ -56,7 +56,7 @@
                     display: 'name',
                     source: customers
                 }).on("typeahead:select", function (e, customer) {
-                    vm.customerId = customer.id;
+                    vm.CustomerId = customer.id;
                 });
 
             var movies = new Bloodhound({
@@ -80,10 +80,26 @@
                 }).on("typeahead:select", function (e, movie) {
                     $("#movies").append("<li class='list-group-item'>" + movie.name + "</li>");
                     $("#txtMovie").typeahead("val", "");
-                    vm.movieIds.push(movie.id);
+                    vm.MoviesId.push(movie.id);
 
                     console.log(vm);
                 });
+
+            $("#newRental").submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                        url: "/api/MovieRentals",
+                        method: "POST",
+                        data: vm
+                    })
+                    .done(function () {
+                        console.log('done');
+                    })
+                    .fail(function () {
+                        console.log('fail');
+                    });
+            })
+
         });
     </script>
 }

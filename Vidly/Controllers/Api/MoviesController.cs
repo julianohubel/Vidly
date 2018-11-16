@@ -22,10 +22,15 @@ namespace Vidly.Controllers.Api
         }
 
         // GET api/<controller>
-        public IHttpActionResult Get()
+        public IHttpActionResult Get(string query = null)
         {
-            var movies = _context.Movies.Include(c => c.Genre).ToList().Select(Mapper.Map<Movie, MovieDto>);
-            return Ok(movies);            
+            var movies = _context.Movies.Include(c => c.Genre).Where(m => m.Avaliable > 0);
+
+            if (!string.IsNullOrEmpty(query))
+                movies = movies.Where(m => m.Name.Contains(query));
+
+            movies.ToList().Select(Mapper.Map<Movie, MovieDto>);
+            return Ok(movies);
         }
 
         // GET api/<controller>/5
@@ -36,7 +41,7 @@ namespace Vidly.Controllers.Api
             if (movie == null)
                 return NotFound();
 
-            return Ok(Mapper.Map<Movie, MovieDto>(movie));            
+            return Ok(Mapper.Map<Movie, MovieDto>(movie));
         }
 
         // POST api/<controller>
@@ -54,7 +59,7 @@ namespace Vidly.Controllers.Api
 
             movieDto.Id = movie.Id;
 
-            return Created(new Uri(Request.RequestUri + "/"+ movie.Id), movieDto);
+            return Created(new Uri(Request.RequestUri + "/" + movie.Id), movieDto);
         }
 
         // PUT api/<controller>/5
