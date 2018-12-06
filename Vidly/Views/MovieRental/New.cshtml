@@ -116,8 +116,8 @@
                                 MoviesId: [], CustomerId: 0
                             };
                         })
-                        .fail(function () {
-                            toastr.error("Something unexpected happened.");
+                        .fail(function (xhr, status, error) {
+                            toastr.error("Something unexpected happened. <br> " + xhr.responseJSON.message);
                         });
                     return false;
                 }

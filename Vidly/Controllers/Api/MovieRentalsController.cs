@@ -39,6 +39,7 @@ namespace Vidly.Controllers.Api
             if (!ModelState.IsValid)
                 return BadRequest();
 
+
             
             if(movieRentalDto.MoviesId.Count == 0)
                 return BadRequest("List of movies is empty");
@@ -52,6 +53,15 @@ namespace Vidly.Controllers.Api
 
             if (movies.Count != movieRentalDto.MoviesId.Count)
                 return BadRequest("One or more movies are invalid");
+
+            var customerRentalLimit = customer.MaxRentMoviesAtOnce;
+            var moviesRentedByCustomer = _context.MovieRentals
+                .Where(m => m.Customer.Id == customer.Id
+                        && m.DateReturned == null).Count();
+
+            if (movieRentalDto.MoviesId.Count + moviesRentedByCustomer > customerRentalLimit)
+                return BadRequest("Customer Movies Rented is Up to Limit");
+            
 
             MovieRental movieRental;
 

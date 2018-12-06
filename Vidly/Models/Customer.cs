@@ -20,5 +20,8 @@ namespace Vidly.Models
 
         [Display( Name= "Memebership Type")]
         public byte MembershipTypeId { get; set; }
+        [Required]
+        [Display(Name="Maximum movies rent at once")]
+        public int MaxRentMoviesAtOnce { get; set; }
     }
 }

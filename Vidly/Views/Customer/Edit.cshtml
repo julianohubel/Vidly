@@ -22,6 +22,11 @@
         @Html.TextBoxFor(c => c.BirthDate, "{0:dd/MM/yyyy}", new { @class = "form-control", placeholde = "01/01/1990" })
         @Html.ValidationMessageFor(c => c.BirthDate)
     </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.MaxRentMoviesAtOnce);
+        @Html.TextBoxFor(c => c.MaxRentMoviesAtOnce, new { @class = "form-control", placeholder = "999" })
+        @Html.ValidationMessageFor(c => c.BirthDate)
+    </div>
 
     <div class="form-group form-check">
         @Html.CheckBoxFor(c => c.IsSubstribedToNewsletter)
